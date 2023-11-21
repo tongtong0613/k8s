@@ -91,7 +91,7 @@ NetworkPolicy对象中from和to字段游戏一下要注意的点：
 
 iptables是一个操作Linux内核Netfilter子系统的界面。Netfilter子系统的作用相当于Linux内核挡在网卡和用户进程之间的一到防火墙。
 
-![iptables检查点](C:/Users/root/Desktop/kubernetes/images/iptables检查点.png)
+![iptables检查点](./images/iptables检查点.png)
 
 当一个IP包通过网卡进入主机之后，他就进入了Netfilter定义的流入路径中。在这条路径中，IP包要通过路由表路由来决定下一步去向。在这次路由之前，Netfilter设置了一个**PREROUTING**检查点。在Linux内核的实现里，检查点实际上就是内核网络协议栈代码里的Hook。接下来IP包有两种去向：
 - 继续在本机处理

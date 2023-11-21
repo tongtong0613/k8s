@@ -4,7 +4,7 @@
 ##**host-gw**
 host-gw模式和之前两种方式不同，它是一种纯三层的网络解决方案，就是完全通过配置路由表和下一跳来实现的。host-gw的原理是将每个Flannel子网的下一跳设置成该子网对应宿主机的IP，这台主机充当这条容器通信路径的网关。
 
-![host-gw](C:/Users/root/Desktop/kubernetes/images/host-gw.png)
+![host-gw](./images/host-gw.png)
 
 container-1要访问container-2，当设置Flannel为host-gw模式后，flanneld会在宿主机上创建一条路由：
 
@@ -34,7 +34,7 @@ Calico项目架构分为三部分：
 2. Felix。它是一个DaemonSet，负责在宿主机插入路由规则，以及维护Calico所需网络设备等。
 3. BIRD。它是BGP客户端，专门负责在集群分发路由规则信息。
 
-![Calico](C:/Users/root/Desktop/kubernetes/images/Calico.png)
+![Calico](./images/Calico.png)
 
 Calico的CNI插件会为每个容器设置一个Veth Pair设备，其中一端放在宿主机上。但是，Calico没有使用CNI网桥模式，因此CNI插件还需为每个容器的Veth Pair设备在宿主机上配置一条路由：
 
@@ -50,7 +50,7 @@ Calico的CNI插件会为每个容器设置一个Veth Pair设备，其中一端�
 
 如果二层不通，则需要打开IPIP模式。
 
-![IPIP](C:/Users/root/Desktop/kubernetes/images/IPIP.png)
+![IPIP](./images/IPIP.png)
 
 IPIP模式下，Felix进程在Node1添加的路由规则稍有不同：
 
@@ -60,6 +60,6 @@ IPIP模式下，Felix进程在Node1添加的路由规则稍有不同：
 
 这一次负责将数据包发出去的设备由eth0变成了tunl0。tunl0是一个IP隧道设备，IP包进入后，就会被Linux内核的IPIP驱动接管。将这个IP包直接封装在一个宿主机网络的IP包中：
 
-![IPIP封包](C:/Users/root/Desktop/kubernetes/images/IPIP封包.png)
+![IPIP封包](./images/IPIP封包.png)
 
 封装后新的IP包的目的地址就是原IP报的下一跳地址，即Node2的IP地址。这样原先一个从容器到Node2的数据包，就被封装成了一个从Node1到Node2的数据包，这样就可以通过三层转发到达。

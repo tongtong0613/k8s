@@ -1,1 +1,1 @@
-![整体流程](C:/Users/root/Desktop/kubernetes/images/kubelet-run.jpeg)
+![整体流程](./images/kubelet-run.jpeg)

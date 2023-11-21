@@ -4,7 +4,7 @@
 
 ##**Istio项目中的声明式API**
 
-![Istio项目架构](C:/Users/root/Desktop/kubernetes/images/Istio.png)
+![Istio项目架构](./images/Istio.png)
 
 从图中看出Istio项目最根本的组件是在每一个应用Pod里运行的Envoy容器。Istio项目以sidecar容器的方式，在每个Pod里运行这个代理服务。由于Pod里所有容器共享一个Network Namespace，所以Envoy容器能够通过配置Pod里的iptables规则来接管整个Pod的进出流量。Istio控制层里的Pivot组件就能够通过调用每个Envoy容器的API，来对这个Envoy代理进行配置，从而实现微服务治理。
 

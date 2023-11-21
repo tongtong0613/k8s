@@ -38,7 +38,7 @@ func main() {
 3. main函数启动上述Informer，然后执行controller.Run，启动自定义控制器。
 
 自定义控制器的工作原理如下图所示：
-![自定义控制器](C:/Users/root/Desktop/kubernetes/images/自定义控制器.png)
+![自定义控制器](./images/自定义控制器.png)
 
 - 控制器首先从API Server获取它关心的对象，也就是Network对象。这个操作是依靠`Informer`完成的。Informer与API对象一一对应，因此传递给自定义控制器的是一个Network对象的Informer（`Network Informer`）。
 - 创建Informer工厂时，传递了`networkClient`。Network Informer正是使用networkClient跟API对象建立了连接。真正维护这个连接的时Informer的`Reflector`包。Reflector包使用`ListAndWatch`方法，获取并监听这些Network对象的变化。

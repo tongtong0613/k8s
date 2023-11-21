@@ -9,7 +9,7 @@
 
 调度器对一个Pod调度成功吗，就是将它的spec.nodeName字段填上调度结果节点的名称。
 
-![调度](C:/Users/root/Desktop/kubernetes/images/调度.png)
+![调度](./images/调度.png)
 
 Kubernetes调度器的核心，其实就是两个控制循环。
 

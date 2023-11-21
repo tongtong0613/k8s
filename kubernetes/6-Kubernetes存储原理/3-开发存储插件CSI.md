@@ -6,7 +6,7 @@
 
 ##**CSI插件**
 
-![插件存储](C:/Users/root/Desktop/kubernetes/images/插件存储.png)
+![插件存储](./images/插件存储.png)
 
 
 这套存储插件体系拥有三个独立的外部组件：`Driver Registrar`、`External Provisioner`和`External Attacher`。

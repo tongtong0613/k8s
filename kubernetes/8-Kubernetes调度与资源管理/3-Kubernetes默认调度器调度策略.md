@@ -1,7 +1,7 @@
-##**知识点**
+## **知识点**
 - pass
 
-##**Predicate**
+## **Predicate**
 
 开始调度一个Pod时，Kubernetes调度器会启动16个Goroutine来并发执行预选策略。
 
@@ -24,7 +24,7 @@
 4. Pod相关的过滤规则
     - PodAffinityPredicate：检查待调度Pod与节点上已有Pod的亲密与反亲密关系
 
-##**Priority**
+## **Priority**
 
 - LeastRequestedPriority：选择空闲资源最多的宿主机
 - BalancedResourceAllocation：选择分配后使节点分配最均衡的节点

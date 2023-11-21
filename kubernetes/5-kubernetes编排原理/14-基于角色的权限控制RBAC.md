@@ -1,7 +1,7 @@
-##**知识点**
+## **知识点**
 - pass
 
-##**Role和RoleBinding**
+## **Role和RoleBinding**
 三个基本概念：
 1. Role：角色。其实是一组规则，定义了一组对Kubernetes API对象的操作权限。
 2. Subject：被作用者。用户或ServiceAccount。
@@ -51,7 +51,7 @@ rules:
 ```
 
 
-##**ClusterRole和ClusterRoleBinding**
+## **ClusterRole和ClusterRoleBinding**
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -85,7 +85,7 @@ Kubernetes提供了4个预先定义好的ClusterRole供用户使用：
 4. view
 
 
-##**ServiceAccount**
+## **ServiceAccount**
 ServiceAccount是Kubernetes里的内置用户，它的API对象非常简单,一个简单的ServiceAccount对象只需要Name和Namespace了最基本的字段：
 ```yaml
 apiVersion: v1
@@ -126,7 +126,7 @@ spec:
     image: nginx:1.7.9
   serviceAccountName: example-sa
 ```
-##**用户组Group**
+## **用户组Group**
 一个ServiceAccount在Kubnernets里对应的用户名字是：
 `system:serviceaccount:<ServiceAccount 名字>`
 它对应的内置用户组的名字是：

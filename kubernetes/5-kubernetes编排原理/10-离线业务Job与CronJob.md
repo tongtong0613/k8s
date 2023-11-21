@@ -1,9 +1,9 @@
-##**知识点**
+## **知识点**
 - 在Deployment中，restartPolicy只允许设置为Always；在Job中，restartPolicy只允许设置为Never或者OnFailure。
 - Job Controller控制的对象是Pod。
 - CronJob是一个Job对象的控制器。
 
-##**Job**
+## **Job**
 离线业务，也称Batch Job，这种业务在计算完成后直接退出，不能使用Deployment来管理这种业务，而应该使用Job对象：
 ```yaml
 apiVersion: batch/v1
@@ -33,8 +33,8 @@ spec:
 
 `sepc.completions`定义的是Job至少要完成的Pod数目，即Job的最小完成数。
 
-##**Job对象使用方法**
-###**第一种：外部管理器+Job模板**
+## **Job对象使用方法**
+### **第一种：外部管理器+Job模板**
 特定用法为：把Job的YAML文件定义为一个模板，然后用一个外部工具控制这些模板来生成Pod。
 ```yaml
 apiVersion: batch/v1
@@ -69,7 +69,7 @@ do
 done
 $ kubectl create -f ./jobs
 ```
-###**第二种：拥有固定任务数的并行Job**
+### **第二种：拥有固定任务数的并行Job**
 这种模式下，只关心最后是否有指定数目的任务成功退出，而不关心执行时的并行度：
 ```yaml
 apiVersion: batch/v1
@@ -102,7 +102,7 @@ task := queue.pop()
 process(task)
 exit
 ```
-###**第三种：拥有固定并行度的并行Job**
+### **第三种：拥有固定并行度的并行Job**
 这种模式下，指定并行度，但不设定固定的completions值。此时，必须自己决定何时启动新Pod，何时Job才算执行完成。此时不仅需要一个工作队列来负责任务的分发，还需要能够判断工作队列为空：
 ```yaml
 apiVersion: batch/v1
@@ -135,7 +135,7 @@ for !queue.IsEmpty($BROKER_URL, $QUEUE){
 print("Queue empty, exiting")
 exit
 ```
-##**CronJob**
+## **CronJob**
 CronJob描述的是定时任务，它是一个Job对象的控制器：
 ```yaml
 apiVersion: batch/v1beta1

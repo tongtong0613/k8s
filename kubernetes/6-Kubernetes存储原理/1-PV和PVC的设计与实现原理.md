@@ -1,10 +1,10 @@
-##**知识点**
+## **知识点**
 - PVC描述的是Pod想要使用的持久化存储的属性，比如存储的大小、读写权限等。
 - PV描述的是一个具体的Volume的属性，比如Volume类型、挂载目录、远程存储服务器地址等。
 - StorageClass的作用是充当PV的模板，并且只有同属于一个StorageClass的PV和PVC才能绑定。
 - StorageClass的另一个作用是指定PV的Provisioner。如果此时存储插件支持Dynamic Provisioning，Kubernetes就会自动创建PV。
 
-##**PV与PVC**
+## **PV与PVC**
 PV描述的是持久化存储数据卷，这个API对象主要定义的是一个持久化存储在宿主机上的目录，比如一个NFS的挂载目录：
 ```yaml
 apiVersion: v1
@@ -65,7 +65,7 @@ Kubernetes中存在一个专门处理持久化存储的控制器`Volume Controle
 
 PV与PVC进行绑定，就是将这个PV对象的名字填在了PVC对象的`spec.volumeName`字段上。
 
-##**持久化宿主机目录**
+## **持久化宿主机目录**
 
 所谓容器的Volume，就是将一个宿主机上的目录跟容器里的目录绑定挂载在了一起。而持久化Volume，指的就是该宿主机上的目录具备持久性，即该目录里的内容不会因为容器的删除而被清理，也不会跟当前的宿主机绑定。这样，当容器重启或者在其他节点上重建后，仍能通过挂载Volume访问到这些内容。
 
@@ -73,7 +73,7 @@ PV与PVC进行绑定，就是将这个PV对象的名字填在了PVC对象的`spe
 
 Kubernetes要做的，就是使用这些存储服务来为容器准备一个持久化的宿主机目录，以供将来进行绑定挂载时使用。这个过程分为两阶段：
 
-###**第一阶段：Attach**
+### **第一阶段：Attach**
 
 Attach主要就是为虚拟机挂载远程磁盘。在具体Volume插件的实现接口上，在这个阶段，Kubernetes提供的可用参数是nodeName，即宿主机的名字。
 
@@ -81,7 +81,7 @@ Attach操作，是由`Volume Controller`负责维护的，这个控制循环叫�
 
 `AttachDetachController`运行在Master节点。
 
-###**第二阶段：Mount**
+### **第二阶段：Mount**
 
 Mount主要做的是将磁盘设备格式化并挂载到Volume宿主机目录。在具体Volume插件的实现接口上，在这个阶段，Kubernetes提供的可用参数是dir，即Volume的宿主机目录：
 ```
@@ -91,7 +91,7 @@ Mount主要做的是将磁盘设备格式化并挂载到Volume宿主机目录。
 Mount操作，必须发生在Pod对应的宿主机上，所以它必须是kubelet组件的一部分。这个控制循环称为`VolumeManagerReconciler`，是一个独立于kubelet主循环的Goroutine。
 
 
-##**StorageClass**
+## **StorageClass**
 Kubernetes提供了一套可以自动创建PV的机制：`Dynamic Provisioning`。该机制的工作核心是StorageClass对象。StorageClass对象的作用其实就是创建PV的模板：
 ```yaml
 apiVersion: storage.k8s.io

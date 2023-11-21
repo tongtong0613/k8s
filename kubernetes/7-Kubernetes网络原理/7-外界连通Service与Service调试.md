@@ -1,9 +1,9 @@
-##**知识点**
+## **知识点**
 - pass
 
-##**外部访问Service**
+## **外部访问Service**
 
-###**NodePort**
+### **NodePort**
 
 ```yaml
 apiVersion: v1
@@ -47,7 +47,7 @@ kube-proxy为宿主机生成了下面的iptables规则:
 
 这条规则设置在POSTROUTING检查点，在即将离开这个主机时，对IP包进行了一次SNAT操作。MASQUERADE意思是自动读取eth0现在的ip地址然后做SNAT出去，这样就实现了很好的动态SNAT地址转换。IP包的原地址替换成这台宿主机的CNI网桥地址或者宿主机本身的IP地址（网桥不存在）。
 
-###**LoadBalancer**
+### **LoadBalancer**
 
 这种方式适用于公有云上的Kubernetes服务。
 
@@ -67,7 +67,7 @@ spec:
 
 公有云Kubernetes服务力，提供了一个CloudProvider的转接层来与公有云本身API对接。上述LoadBalancer类型Service提交后，Kubernetes会自动调用CloudProvider在公有云上创建一个负载均衡服务，并把被代理的Pod的IP地址配置给负载均衡服务作为后端。
 
-###**ExternalName**
+### **ExternalName**
 
 ```yaml
 apiVerrsion: v1
@@ -99,7 +99,7 @@ spec:
 ```
 指定externalIPs后，就可以通过80.11.12.10访问到被代理的Pod了。
 
-##**Service排查错误**
+## **Service排查错误**
 
 当service无法通过DNS访问时，首先检查Kubernetes自己的Master节点的Service DNS是否正常：
 

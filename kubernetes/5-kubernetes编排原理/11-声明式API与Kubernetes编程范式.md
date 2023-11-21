@@ -1,8 +1,8 @@
-##**知识点**
+## **知识点**
 - 响应命令式请求(kubectl replace)执行过程是使用新的YAML文件中的API对象替换原有的API对象，一次只能处理一个写请求，否则可能发生冲突。
 - 声明式请求(kubectl apply)是执行力对原有API对象的PATCH操作，一次能处理多个写操作，并且具备Merge能力。
 
-##**Istio项目中的声明式API**
+## **Istio项目中的声明式API**
 
 ![Istio项目架构](./images/Istio.png)
 

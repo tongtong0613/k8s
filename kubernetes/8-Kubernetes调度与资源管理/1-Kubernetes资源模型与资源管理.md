@@ -1,7 +1,7 @@
-##**知识点**
+## **知识点**
 - pass
 
-##**资源模型**
+## **资源模型**
 
 Pod是Kubernetes中最小调度单位，所有跟调度和资源管理相关属性都是Pod的字段。最重要的就是CPU和内存：
 
@@ -41,7 +41,7 @@ requests和limits区别如下：调度的时候，kube-scheduler会按照request
 
 用户在提交Pod时，可以声明一个较小的requests值供调度器使用，而Kubernetes真正给容器Cgroups设置的limits较大。
 
-##**QOS模型**
+## **QOS模型**
 
 Kubernetes中，不同的requests和limits值的设定，会将这个Pod划分到不同的QOS级别。
 

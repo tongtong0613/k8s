@@ -1,8 +1,8 @@
-##**知识点**
+## **知识点**
 - Ingress实际上就是Kubernetes对反向代理的抽象
 - Ingress只能工作在七层，Service只能工作在四层。所以在Kubernetes中为应用进行TLS配置等HTTP相关操作，必须通过Ingress进行。
 
-##**Ingress**
+## **Ingress**
 全局的、为了代理不同后端Service而设置的负载均衡服务，就是Kubernetes中的Ingress对象。Ingress就是Service的Service。
 
 假如有一个站点：http://cafe.example.com，其中http://cafe.example.com/coffee对应咖啡点餐系统，http://cafe.example.com/tea对应茶水点餐系统。这两个系统分别由名为coffee和tea的两个Deployment来提供服务。

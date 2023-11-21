@@ -1,10 +1,10 @@
-##**知识点**
+## **知识点**
 - Kubernetes网络模型
   - 所有容器都可以直接用IP地址与其他容器通信，无需使用NAT
   - 所有宿主机都可以直接使用IP地址与所有容器通信，无需使用NAT，反之亦然
   - 容器自己看到的自己的IP地址，和别人（宿主机或者容器）看到的地址完全一样
 
-##**CNI网桥**
+## **CNI网桥**
 Kubernetes是通过一个叫作CNI的接口维护了一个单独的网桥来代替docker0，这个网桥叫作CNI网桥，在宿主机上的默认设备名称是cni0。
 
 CNI的设计思想是：Kubernetes在启动Infra容器后，就可以直接调用CNI网络插件，为这个Infra容器的Network Namespace配置符合预期的网络栈。
@@ -13,17 +13,17 @@ CNI的设计思想是：Kubernetes在启动Infra容器后，就可以直接调�
 1. 实现这个网络方案本身，主要室编写flanneld进程里的主要逻辑。比如，创建和配置flannel.1设备，配置宿主机路由，配置ARP和FDB表里的信息。
 2. 实现网络方案对应的CNI插件。这部分主要是配置Infra容器的网络栈并把它连接到CNI网桥上。
 
-##**CNI插件工作原理**
+## **CNI插件工作原理**
 
 当kubelet组件创建Pod时，首先会创建Infra容器。在这一步，dockershim会先调用Docker API创建并启动Infra容器，接着执行一个`SetUpPod`方法。这个方法用于为CNI插件准备参数，然后调用CNI插件为Infra容器配置网络。
 
-###**准备参数**
+### **准备参数**
 需要的参数分为两部分：
 1. 由dockershim设置的一组CNI环境变量。最重要的环境变量为CNI_COMMAND。取值为ADD或DEL。ADD意味着把容器添加到CNI网络，DEL意味着从CNI网络移除容器。
 2. dockershim从CNI配置文件里加载得到的默认插件的配置信息。配置文件里有一个delegate字段，意思是CNI插件不会亲自上阵，而是会调用delegate指定的某种CNI内置插件完成任务。对于Flannel则会调用CNI Bridge插件。
 
 
-###**配置网络**
+### **配置网络**
 
 首先，CNI Bridge插件在宿主机检查CNI网桥是否存在，不存在则创建，相当于在宿主机执行：
 ```

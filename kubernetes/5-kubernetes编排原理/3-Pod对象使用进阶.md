@@ -1,13 +1,13 @@
-##**知识点**
+## **知识点**
 - pass
   
-##**Projected Volume**
+## **Projected Volume**
 Projected Volume（投射数据卷）是一种特殊的Volume，其存在的意义不是为了存放容器里的数据，也不是用于容器和宿主机之间的数据交换，而是为容器提供预先定义好的数据。常用Projected Volume共有以下4种：
 1.  Secret
 2.  ConfigMap
 3.  Downward API
 4.  ServiceAccountToken
-###**Secret**
+### **Secret**
 Secret的作用是把Pod想要访问的加密数据存放到etcd种，这样就可以通过在Pod的容器中挂载Volume的方式访问这些Secret里保存的信息了。
 Secret最典型的使用场景就是存放数据库的Credential信息，示例如下：
 ```yaml
@@ -52,7 +52,7 @@ YMRtaW4=
 echo -n '1f2d1e2e67df' | base64
 MWYyZDFlMmU2N2Rm
 ```
-###**ConfigMap**
+### **ConfigMap**
 ConfigMap与Secret类似，区别是ConfigMap保存的是无需加密的、应用所需的配置信息。除此之外，与Secret用法几乎完全相同：
 ```yaml
 apiVersion: v1
@@ -66,7 +66,7 @@ data:
     allow.textmode=true
     how.nice.to.look=fairlyNice
 ```
-###**Downward API**
+### **Downward API**
 Downward API的作用是让Pod里的容器能够直接获取这个Pod API对象本身的信息：
 ```yaml
 apiVersion: v1
@@ -132,7 +132,7 @@ spec:
 
 Downward API能够获取的信息一定是Pod里的容器进程启动之前就能确定的信息，如果想要获取Pod容器运行后才会出现的信息，比如容器进程的PID，就不能使用Downward API，而应该考虑sidecar方式。
 
-###**ServiceAccountToken**
+### **ServiceAccountToken**
 Sevice Account对象是Kubernetes系统内置的一种服务账户，是Kubernetes进行权限分配的对象。像Service Account这样的授权信息和文件，实际上保存在它所绑定的一个特殊的Secret对象，即ServiceAccountToken。
 
 Kubernetes集群里的每一个Pod都自动声明了一个类型是Secret、名为default-token-xxxx的Volume，然后挂载在每个容器的固定目录上：
@@ -160,7 +160,7 @@ ca.crt  namespace token
 
 >这种把Kubernetes客户端以容器的方式在集群中运行，然后使用默认Service Account自动授权的方式，称为**InClusterConfig**。
 
-##**容器健康检查和恢复机制**
+## **容器健康检查和恢复机制**
 在Kubernets中，可以为Pod里的容器定义一个健康检查“探针”（Probe）。这样kubelet就会根据Probe的返回值确定这个容器的状态，而不是直接以容器是否运行作为依据。
 ```yaml
 apiVersion: v1
@@ -235,7 +235,7 @@ livenessProbe:
 ```
 还有一个readinessProbe，用法与livenessProbe类似，作用却不同。readinessProbe检查结果决定了这个Pod能否通过Service的方式访问。
 
-##**PodPreset**
+## **PodPreset**
 首先定义一个PodPreset对象。在这个对象中，预先定义好在Pod里追加的字段：
 ```yaml
 apiVersion: settings.k8s.io/v1alpha1

@@ -1,7 +1,7 @@
-##**知识点**
+## **知识点**
 - pass
 
-##**声明式API的工作原理**
+## **声明式API的工作原理**
 Kubernetes项目中，一个API对象在etcd里的完整路径是由`Group（API组）`、`Version（API版本）`和`Resource（API资源类型）`三个部分组成的。
 
 Kubernetes核心API对象，比如Pod、Node等，不需要Group。对于这些API对象来说，Kubernetes直接在/api这个层级进行匹配。而对于CronJob这种非核心API对象来说，必须在/apis这个层级进行匹配，首先找到Group batch，然后匹配版本，最后匹配资源类型。
@@ -13,7 +13,7 @@ Kubernetes核心API对象，比如Pod、Node等，不需要Group。对于这些A
 4. API Server先后进行Admission()和Validation()操作。上一节的Admission Controller和Initializer就属于Admission内容。Validation验证对象里各个字段是否合法。经过验证的API对象保存在API Server的`Registry`数据结构中。
 5. API Server把经过验证的API对象转换成用户最初提交的版本，进行序列化操作，并调用etcd API进行保存。
 
-##**添加Network资源类型**
+## **添加Network资源类型**
 现在要为Kubernetes添加一个名为Network的API资源类型，它的作用是，一旦用户创建了一个Network对象，那么Kubernetes使用这个Network对象定义的网络参数，调用真实网络插件，创建真正的网络。
 
 这个Network对象的YAML文件example-network.yaml如下所示：

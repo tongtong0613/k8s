@@ -1,8 +1,8 @@
-##**知识点**
+## **知识点**
 - PVC是一种特殊的Volume，只不过PVC是什么类型的Volume，要和某个PV绑定之后才能知道。
 - StatefulSet控制器直接管理Pod，Deployment控制器直接管理ReplicaSet。
 
-##**PVC和PV**
+## **PVC和PV**
 Kubernetes引入一组叫做PVC和PV的API对象，降低用户声明和使用PV的门槛。有了PVC之后，想要使用一个Volume，只需以下两步：
 **第一步：定义一个PVC，声明想要的Volume属性**
 ```yaml
@@ -68,7 +68,7 @@ spec:
 ```
 PVC和PV的设计，类似于接口和实现的思想。开发者只要知道并会使用接口（PVC），运维人员负责给接口绑定具体的实现（PV）。
 
-##**StatefulSet使用PVC**
+## **StatefulSet使用PVC**
 ```yaml
 apiVersion: apps/v1
 kind: StatefulSet
@@ -114,7 +114,7 @@ spec:
 
 如果删除这两个Pod，这两个Pod会按照编号的顺序重新创建。原先与名为web-0的Pod绑定的PV，在这个Pod被重新创建出来之后，依旧与其绑定在一起。
 
-##**StatefulSet工作原理**
+## **StatefulSet工作原理**
 **首先，StatefulSet的控制器直接管理的是Pod**。因为StatefulSet里不同Pod实例不再像ReplicaSet中那样是完全一样的。比如，每个Pod的hostname、名字等都不同，都携带了编号。而StatefulSet通过在Pod的名字里加上编号来区分这些实例。
 
 **其次，Kubernetes通过Headless Service为这些有编号的Pod，在DNS服务器中生成带有相同编号的DNS记录**。只要StatefulSet能够保证这些Pod名字里的编号不变，那么Service里类似于web-0.nginx.default.svc.cluster.local这样的DNS记录就不会变，而这条记录解析出来的IP地址，会随着Pod的删除核重建而自动更新。

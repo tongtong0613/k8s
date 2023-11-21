@@ -1,4 +1,4 @@
-##**知识点**
+## **知识点**
 - 容器的本质：Namespace做隔离，Cgroups做限制，rootfs做文件系统。
 - 容器的本质是进程，kubernetes就是操作系统，容器的镜像是系统里的.exe安装包。
 - Pod是kubernetes中最小的API对象，是原子调度单位。
@@ -6,7 +6,7 @@
 - Pod是一组共享了某些资源的容器。
 - Pod扮演的是虚拟机的角色，容器扮演的是这个虚拟机运行的用户程序。
 
-##**Infra容器**
+## **Infra容器**
 
 Pod的实现需要使用一个中间容器Infra，Infra容器在Pod中第一个被创建，其他容器通过Join Network Namespace方式与Infra关联在一起。
 
@@ -56,8 +56,8 @@ spec:
 
 从而nginx-container可以在它的/usr/share/nginx/html目录中读取到debian-container生成的index.html文件。
 
-##实践
-###**War包与Web服务器**
+## 实践
+### **War包与Web服务器**
 
 有一个Java Web应用的WAR包，它需要放在Tomcat的webapps目录下运行：
 

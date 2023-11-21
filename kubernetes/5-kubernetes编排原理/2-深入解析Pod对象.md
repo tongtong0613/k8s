@@ -1,10 +1,10 @@
-##**知识点**
+## **知识点**
 - Container是Pod属性里的一个普通字段。
 - 凡是调度、网络、存储以及安全相关的属性，基本上是Pod级别的。
 - 凡是跟容器的Linux Namespace相关的属性，一定是Pod级别的。
 
-##**Pod中的重要字段**
-###**NodeSelector**
+## **Pod中的重要字段**
+### **NodeSelector**
 NodeSelector是一个供用户将Pod与Node进行绑定的字段，用法如下：
 ```yaml
 apiVersion: v1
@@ -15,10 +15,10 @@ spec:
 ```
 这样的配置意味着这个Pod只能在携带了disktype:ssd标签的节点上运行，否则将调度失败。
 
-###**NodeName**
+### **NodeName**
 一旦这个字段被赋值，kubernetes将会认为这个Pod已调度，调度的结果就是赋值的节点名称。
 
-###**HostAliases**
+### **HostAliases**
 定义了Pod的hosts文件，用法如下：
 ```yaml
 apiVersion: v1
@@ -41,7 +41,7 @@ cat /etc/hosts
 ```
 在Kubernetes项目中，如果要设置hosts文件里的内容，一定要通过这种方式。如果直接修改了hosts文件，在Pod被删除重建后，kubelet会自动覆盖修改的内容。
 
-###**shareProcessNamespace**
+### **shareProcessNamespace**
 这个配置意味着这个Pod里的容器要共享PID Namespace。
 ```yaml
 apiVersion: v1
@@ -70,7 +70,7 @@ PID     USER    TIMR    COMMAND
 21      root    0:00    ps aux
 ```
 在这个容器里，不仅可以看到它本身的ps ax指令，还可以看到nginx容器的进程，以及Infra容器的/pause进程。
-###**hostNetwork、hostIPC、hostPID**
+### **hostNetwork、hostIPC、hostPID**
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -89,10 +89,10 @@ spec:
     tty: true
 ```
 这个POD中，定义了hostNetwork、hostIPC、hostPID为true，即定义了共享宿主机的Network、IPC和PID Namespace。这就意味着，这个Pod里的所有容器都会直接使用宿主机的网络，直接与宿主机进行IPC通信，看到宿主机里正在运行的所有进程。
-##**Pod中Containers字段中的属性**
-###**ImagePullPolicy**
+## **Pod中Containers字段中的属性**
+### **ImagePullPolicy**
 定义了镜像拉取策略。默认值为Always，即每次创建Pod都重新拉取一次镜像。另外，当镜像是类似于nginx或nginx:latest这样的名字时，ImagePullPolicy也会被认为是Always。
-###**Lifecycle**
+### **Lifecycle**
 定义的是Container Lifecycle Hook，作用是在容器状态发生变化时触发一系列“钩子”。示例如下：
 ```yaml
 apiVersion: v1
@@ -113,7 +113,7 @@ spec:
 ```
 postStart指的是容器启动后立即执行一个指定操作。其定义的操作虽然是在Docker 容器ENTERYPOINT执行之后，但它并不严格保证顺序。也就是说，postStart启动时，ENTRYPOINT可能尚未结束。
 preStop发生的时机是在容器被结束之前。preStop操作的执行是同步的，所以它会阻塞当前容器的结束流程，知道这个Hook定义的操作完成之后，才允许容器被结束。
-##**Pod对象的生命周期**
+## **Pod对象的生命周期**
 Pod生命周期的变化主要体现在Pod API对象的Status部分。pod.status.phase就是Pod的当前状态，有以下几种可能：
 
 1. Pending。这个状态意味着，Pod的YAML文件已经提交到了Kubernetes，API对象已经成功保存到了etcd中。但是这个Pod里有些容器因为某种原因不能顺利创建

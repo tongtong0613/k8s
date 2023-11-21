@@ -1,7 +1,7 @@
-##**知识点**
+## **知识点**
 - pass
 
-##**Service**
+## **Service**
 Kubernetes之所以需要Service，一方面是因为Pod的IP不是固定不变的，另一方面是因为一组Pod实例之间总会有负载均衡的需求。
 
 一个典型的Service：
@@ -77,7 +77,7 @@ hostnames-bvc05
 这个VIP地址是Kubernetes自动为Service分配的。而像上面这样，通过三次连续不断地访问Service的VIP地址和代理端口80，它就为我们依次返回了三个Pod的hostname。这也正印证了Service提供的是Round Robin方式的负载均衡。对于这种方式，我们称为：ClusterIP模式的Service。
 
 
-##**Service工作原理**
+## **Service工作原理**
 
 Service是有kube-proxy组件加上iptables共同实现的。一旦Service被提交给Kubernetes，kube-proxy就会通过Service的Informer感应到一个Service对象的添加，事件的响应是在宿主机上创建一条iptables规则：
 
@@ -117,7 +117,7 @@ DNAT规则的作用是在PREROUTING检查点之前，将流入IP包的目的地�
 kube-proxy通过iptables处理Service的过程，需要在宿主机创建相当多的iptables规则。在大规模项目中，会占用大量宿主机CPU资源。
 
 
-##**IPVS模式**
+## **IPVS模式**
 
 为kube-proxy设置--proxy-mode=ipvs来开启这个功能。
 
@@ -151,7 +151,7 @@ IPVS在内核中的实现也是基于Netfilter的NAT模式，因此其转发性�
 
 需要注意的是，IPVS只负责负载均衡和代理功能，而一个完整Service流程需要的包过滤、SNAT等操作还是需要靠iptables来实现。
 
-##**DNS**
+## **DNS**
 
 对于ClusterIP模式的Service和Headless Service来说，他们的A记录格式都如下所示：
 

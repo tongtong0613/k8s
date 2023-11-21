@@ -1,12 +1,12 @@
-##**知识点**
+## **知识点**
 - pass
 
-##**为Network编写一个自定义控制器**
+## **为Network编写一个自定义控制器**
 声明式API的业务功能实现需要通过控制器模式来监视API对象的变化，然后据此决定实际要执行的工作。
 
 编写自定义控制器代码的过程包括三个部分：编写main函数，编写自定义控制器的定义，编写控制器的业务逻辑。
 
-###**编写main函数**
+### **编写main函数**
 main函数的主要作用是定义并初始化一个自定义控制器并启动它：
 ```go
 func main() {
@@ -48,7 +48,7 @@ func main() {
 - Informer的第二个职责就是根据这些事件的类型触发事先注册好的`ResourceEventHandler`。这些Handler需要在创建控制器时注册给它对应的Informer。
 - 每经过`resyncPeriod`事件，Informer维护的本地缓存都会使用最近一次List返回的结果强制更新一次，这个操作称为`resync`。
 
-###**编写控制器的定义**
+### **编写控制器的定义**
 ```go
 func NewController(
 	kubeclientset kubernetes.Interface,
@@ -107,7 +107,7 @@ func (c *Controller) Run(threadiness int, stopCh <-chan struct{}) error {
 1. 等待Informer完成一次本地缓存的数据同步操作。
 2. 通过Goroutine启动一个（或并发启动多个）无限循环的任务。
 
-###**编写控制器业务逻辑**
+### **编写控制器业务逻辑**
 ```go
 func (c *Controller) runWorker() {
 	for c.processNextWorkItem() {

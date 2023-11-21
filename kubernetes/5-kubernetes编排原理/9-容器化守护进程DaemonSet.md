@@ -1,4 +1,4 @@
-##**知识点**
+## **知识点**
 - DaemonSet的主要作用是可以在Kubernetes集群里运行一个Daemon Pod。
 - DaemonSet和Deployment非常相似，只不过没有replicas字段。
 - DaemonSet的控制循环中，只需要遍历所有节点，然后根据节点上是否有被管理Pod的情况，来决定是否创建或者删除一个节点。
@@ -7,7 +7,7 @@
 - Deployment管理ReplicaSet对象，DaemonSet管理Pod对象，StatefulSet管理Pod对象。
 - Deployment通过ReplicaSet对象管理版本，DaemonSet和StatefulSet通过ControllerRevision对象管理版本。
 
-##**DaemonSet**
+## **DaemonSet**
 DaemonSet的主要作用是可以在Kubernetes集群里运行一个Daemon Pod。这个Pod有以下特征：
 1. 这个Pod在Kubernetes集群里的没一个节点上运行。
 2. 每个节点上只有一个这样的Pod实例。

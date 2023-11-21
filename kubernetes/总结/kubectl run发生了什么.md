@@ -1,0 +1,1 @@
+![整体流程](C:/Users/root/Desktop/kubernetes/images/kubelet-run.jpeg)

@@ -1,0 +1,60 @@
+# Copyright 2022 DigitalOcean
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+### Release a new CSI version once a tag is pushed.
+name: release
+
+env:
+  DOCKER_ORG: digitalocean
+  DOCKER_USER: ${{ secrets.DockerHubUser }}
+
+on:
+  push:
+    tags-ignore:
+      # The tags below are for Kubernetes <1.14 which are not supported by the
+      # upstream end-to-end tests and are not actively maintained anymore.
+      - v0.*
+      - v1.0.*
+
+jobs:
+  release:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab  # v3.5.2
+        with:
+          fetch-depth: 1
+
+      - name: Log into container registry
+        run: echo "${{ secrets.DockerHubToken }}" | docker login --username ${DOCKER_USER} --password-stdin
+
+      # Rebuild plugin instead of just promoting the latest :master image so
+      # that the right version is correctly baked into the release via the -X
+      # flag.
+      - name: Build and push released plugin image
+        run: |
+          VERSION="$(git describe --tags)"
+          DOCKER_REPO=${DOCKER_ORG}/do-csi-plugin make publish
+
+      - name: create Github release
+        uses: softprops/action-gh-release@b7e450da2a4b4cb4bfbae528f788167786cfcedf  # v0.1.5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          body: |
+            See the [change log](CHANGELOG.md) for release details.
+
+            Refer to the [installation instructions](README.md#installing-to-kubernetes) to learn how the CSI driver can be installed. (**Note:** The driver comes pre-installed already for [DOKS](https://www.digitalocean.com/products/kubernetes/) users.)
+          draft: false

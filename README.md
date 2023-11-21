@@ -1,0 +1,87 @@
+
+- [k8s](#k8s)
+  - [kubernetes](#kubernetes)
+    - [5-kubernetes编排原理](#5-kubernetes编排原理)
+      - [1-为什么需要Pod.md](#1-为什么需要podmd)
+      - [2-深入解析Pod对象.md](#2-深入解析pod对象md)
+      - [3-Pod对象使用进阶.md](#3-pod对象使用进阶md)
+      - [4-控制器思想.md](#4-控制器思想md)
+      - [5-作业副本与水平扩展.md](#5-作业副本与水平扩展md)
+      - [6-理解StatefulSet的拓扑状态.md](#6-理解statefulset的拓扑状态md)
+      - [7-理解StatefulSet的存储状态.md](#7-理解statefulset的存储状态md)
+      - [8-有状态应用实践.md](#8-有状态应用实践md)
+      - [9-容器化守护进程DaemonSet.md](#9-容器化守护进程daemonsetmd)
+      - [10-离线业务Job与CronJob.md](#10-离线业务job与cronjobmd)
+      - [11-声明式API与Kubernetes编程范式.md](#11-声明式api与kubernetes编程范式md)
+      - [12-声明式API的工作原理.md](#12-声明式api的工作原理md)
+      - [13-API编程范式具体原理.md](#13-api编程范式具体原理md)
+      - [14-基于角色的权限控制RBAC.md](#14-基于角色的权限控制rbacmd)
+    - [6-kubernetes存储原理](#6-kubernetes存储原理)
+      - [1-PV和PVC的设计与实现原理.md](#1-pv和pvc的设计与实现原理md)
+      - [2-本地持久数据化卷.md](#2-本地持久数据化卷md)
+      - [3-开发存储插件CSI.md](#3-开发存储插件csimd)
+    - [7-kubernetes网络原理](#7-kubernetes网络原理)
+      - [1-单机容器网络的实现原理.md](#1-单机容器网络的实现原理md)
+      - [2-容器跨主机网络.md](#2-容器跨主机网络md)
+      - [3-Kubernetes网络模型与CNI网络插件.md](#3-kubernetes网络模型与cni网络插件md)
+      - [4-Kubernetes三层网络方案.md](#4-kubernetes三层网络方案md)
+      - [5-Kubernetes中的网络隔离NetworkPolicy.md](#5-kubernetes中的网络隔离networkpolicymd)
+      - [6-Service与DNS与服务发现.md](#6-service与dns与服务发现md)
+      - [7-外界连通Service与Service调试.md](#7-外界连通service与service调试md)
+      - [8-Kubernetes中的Ingress对象.md](#8-kubernetes中的ingress对象md)
+    - [8-kubernetes调度与资源管理](#8-kubernetes调度与资源管理)
+      - [1-Kubernetes资源模型与资源管理.md](#1-kubernetes资源模型与资源管理md)
+      - [2-Kubernetes默认调度器.md](#2-kubernetes默认调度器md)
+      - [3-Kubernetes默认调度器调度策略.md](#3-kubernetes默认调度器调度策略md)
+      - [4-Kubernetes默认调度器的优先级和抢占机制.md](#4-kubernetes默认调度器的优先级和抢占机制md)
+    - [总结](#总结)
+      - [kubectl创建Pod的背后发生了什么.md](#kubectl创建pod的背后发生了什么md)
+    - [codes](#codes)
+      - [csi-digitalocean-master](#csi-digitalocean-master)
+      - [k8s-controller-custom-resource-main](#k8s-controller-custom-resource-main)
+
+# k8s
+## kubernetes
+### 5-kubernetes编排原理
+#### 1-为什么需要Pod.md
+#### 2-深入解析Pod对象.md
+#### 3-Pod对象使用进阶.md
+#### 4-控制器思想.md
+#### 5-作业副本与水平扩展.md
+#### 6-理解StatefulSet的拓扑状态.md
+#### 7-理解StatefulSet的存储状态.md
+#### 8-有状态应用实践.md
+#### 9-容器化守护进程DaemonSet.md
+#### 10-离线业务Job与CronJob.md
+#### 11-声明式API与Kubernetes编程范式.md
+#### 12-声明式API的工作原理.md
+#### 13-API编程范式具体原理.md
+#### 14-基于角色的权限控制RBAC.md
+
+### 6-kubernetes存储原理
+#### 1-PV和PVC的设计与实现原理.md
+#### 2-本地持久数据化卷.md
+#### 3-开发存储插件CSI.md
+
+### 7-kubernetes网络原理
+#### 1-单机容器网络的实现原理.md
+#### 2-容器跨主机网络.md
+#### 3-Kubernetes网络模型与CNI网络插件.md
+#### 4-Kubernetes三层网络方案.md
+#### 5-Kubernetes中的网络隔离NetworkPolicy.md
+#### 6-Service与DNS与服务发现.md
+#### 7-外界连通Service与Service调试.md
+#### 8-Kubernetes中的Ingress对象.md
+
+### 8-kubernetes调度与资源管理
+#### 1-Kubernetes资源模型与资源管理.md
+#### 2-Kubernetes默认调度器.md
+#### 3-Kubernetes默认调度器调度策略.md
+#### 4-Kubernetes默认调度器的优先级和抢占机制.md
+
+### 总结
+#### kubectl创建Pod的背后发生了什么.md
+
+### codes
+#### csi-digitalocean-master
+#### k8s-controller-custom-resource-main

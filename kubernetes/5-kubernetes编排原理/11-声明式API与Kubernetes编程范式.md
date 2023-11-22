@@ -142,7 +142,7 @@ initializers:
         resources：
           - pods
 ```
-这个配置意味着Kubernetes要对所有Pod进行Initialize操作，制定了操作的Initializer是envoy-initializer。一旦这个InitializerConfiguration被创建，Kubernetes就会把这个Initializer的名字加在所有新创建Pod的Metadata上：
+这个配置意味着Kubernetes要对所有Pod进行Initialize操作，指定了操作的Initializer是envoy-initializer。一旦这个InitializerConfiguration被创建，Kubernetes就会把这个Initializer的名字加在所有新创建Pod的Metadata上：
 ```yaml
 apiVersion: v1
 kind: Pod

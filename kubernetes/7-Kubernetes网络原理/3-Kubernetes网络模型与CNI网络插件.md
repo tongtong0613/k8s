@@ -59,7 +59,7 @@ vethb4963f3设备连接到cni0网桥后，CNI Bridge插件会为其设置Hairpin
 
 这个特定主要用于容器需要通过NAT方式自己访问自己的场景。
 
-接下来， CNI Bridge插件调用CNI IPAM插件，从ipam.subnet字段规定的网段里为容器分配一个可用IP地址。然后， CNI Bridge插件会把这个IP地址添加到容器的eth0网卡上名同事为容器设置默认路由，相当于执行：
+接下来， CNI Bridge插件调用CNI IPAM插件，从ipam.subnet字段规定的网段里为容器分配一个可用IP地址。然后， CNI Bridge插件会把这个IP地址添加到容器的eth0网卡上同时为容器设置默认路由，相当于执行：
 
 ```
 # 容器
